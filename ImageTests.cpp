@@ -8,9 +8,27 @@ TEST(Image, defaultCtor)
 {
     Image i;
     EXPECT_EQ(i.width(), 0);
-    EXPECT_EQ(i.height(),0);
+    EXPECT_EQ(i.height(), 0);
     EXPECT_EQ(i.channels(), 3);
+    EXPECT_EQ(i.pixels(), nullptr);
+}
 
+TEST (Image, userCtor)
+{
+    Image i(100,100);
+    EXPECT_EQ(i.width(), 100);
+    EXPECT_EQ(i.height(), 100);
+    EXPECT_EQ(i.channels(), 3);
+    EXPECT_NE(i.pixels(), nullptr);
+}
 
-
+TEST(Image, setPixel)
+{
+    Image i(100,100);
+    i.setPixel(0,0,255,0,0);
+    unsigned char r,g,b;
+    i.getPixel(0,0,&r,&g,&b);
+    EXPECT_EQ(r,255);
+    EXPECT_EQ(g,255);
+    EXPECT_EQ(b,255);
 }
